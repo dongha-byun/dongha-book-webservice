@@ -2,9 +2,12 @@ package com.dongha.book.service.posts;
 
 import com.dongha.book.domain.posts.Posts;
 import com.dongha.book.domain.posts.PostsRepository;
+import com.dongha.book.web.dto.PostsListResponseDto;
 import com.dongha.book.web.dto.PostsResponseDto;
 import com.dongha.book.web.dto.PostsSaveRequestDto;
 import com.dongha.book.web.dto.PostsUpdateRequestDto;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,5 +41,18 @@ public class PostsService {
                 .orElseThrow(
                         () -> new IllegalArgumentException("게시글이 존재하지 않습니다.")
                 );
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Posts post = getPosts(id);
+        postsRepository.delete(post);
     }
 }
