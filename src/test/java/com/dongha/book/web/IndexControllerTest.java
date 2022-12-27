@@ -1,5 +1,7 @@
 package com.dongha.book.web;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +24,6 @@ public class IndexControllerTest {
         String body = restTemplate.getForObject("/", String.class);
 
         // then
-        Assertions.assertThat(body).contains("스프링 부트로 시작하는 웹 서비스");
+        assertThat(body).contains("스프링부트로 시작하는 웹 서비스");
     }
 }

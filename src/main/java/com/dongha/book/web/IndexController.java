@@ -1,5 +1,7 @@
 package com.dongha.book.web;
 
+import com.dongha.book.config.auth.LoginUser;
+import com.dongha.book.config.auth.dto.SessionUser;
 import com.dongha.book.service.posts.PostsService;
 import com.dongha.book.web.dto.PostsListResponseDto;
 import com.dongha.book.web.dto.PostsResponseDto;
@@ -17,9 +19,14 @@ public class IndexController {
     private final PostsService postsService;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(@LoginUser SessionUser user, Model model){
         List<PostsListResponseDto> posts = postsService.findAllDesc();
         model.addAttribute("posts", posts);
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
         return "index";
     }
 
