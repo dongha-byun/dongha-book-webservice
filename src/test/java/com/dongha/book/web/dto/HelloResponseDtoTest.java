@@ -1,10 +1,8 @@
 package com.dongha.book.web.dto;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.*;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class HelloResponseDtoTest {
 

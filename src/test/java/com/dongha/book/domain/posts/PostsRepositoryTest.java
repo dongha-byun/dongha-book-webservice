@@ -4,24 +4,22 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringRunner.class)
+@Transactional
 @SpringBootTest
 public class PostsRepositoryTest {
 
     @Autowired
     PostsRepository postsRepository;
 
-    @After
-    public void after(){
-        postsRepository.deleteAll();
-    }
+//    @AfterEach
+//    public void after(){
+//        postsRepository.deleteAll();
+//    }
 
     @Test
     public void save(){
@@ -40,8 +38,8 @@ public class PostsRepositoryTest {
         // then
         assertThat(savePost.getId()).isNotNull();
         assertThat(savePost.getTitle()).isEqualTo(title);
-        assertThat(savePost.getTitle()).isEqualTo(title);
-        assertThat(savePost.getTitle()).isEqualTo(title);
+        assertThat(savePost.getContent()).isEqualTo(content);
+        assertThat(savePost.getAuthor()).isEqualTo(author);
     }
 
     @Test

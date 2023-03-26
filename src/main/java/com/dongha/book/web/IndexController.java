@@ -42,4 +42,9 @@ public class IndexController {
         model.addAttribute("post", post);
         return "posts-update";
     }
+
+    @GetMapping
+    public String reports() {
+        return "reports";
+    }
 }
