@@ -13,3 +13,8 @@ spring:
 
   session:
     store-type: jdbc
+
+server:
+  servlet:
+    encoding:
+      force: true
