@@ -14,8 +14,26 @@ cache:
 
 script: "./gradlew clean build"
 
+# 빌드 파일을 S3로 보내는 설정
+before_deploy:
+  - zip -r dongha-book-webservice *
+  - mkdir -p deploy
+  - mv dongha-book-webservice.zip deploy/dongha-book-webservice.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings 에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings 에 설정된 값
+    bucket: dongha-book-webservice-build # S3 버킷 명
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private # zip 파일 접근을 private 로
+    local_dir: deploy # before_deploy 에서 생성한 디렉터리
+    wait-until-deployed: true
+
 # CI 실행 완료 시 메일로 알람
 notifications:
   email:
     recipients:
       - byunsw4@naver.com
+
