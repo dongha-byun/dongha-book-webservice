@@ -16,9 +16,16 @@ script: "./gradlew clean build"
 
 # 빌드 파일을 S3로 보내는 설정
 before_deploy:
-  - zip -r dongha-book-webservice *
-  - mkdir -p deploy
-  - mv dongha-book-webservice.zip deploy/dongha-book-webservice.zip
+  #- zip -r dongha-book-webservice *
+  #- mkdir -p deploy
+  #- mv dongha-book-webservice.zip deploy/dongha-book-webservice.zip
+  - mkdir -p before-deploy # zip 에 포함시킹 파일들을 담을 디렉토리 생성
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy * # before-deploy 로 이동 후, 전체 압축
+  - cd ../ && mkdir -p deploy # 상위 디렉토리 이동 후, deploy 폴더 생성
+  - mv before-deploy/before-deploy.zip deploy/dongha-book-webservice.zip # deploy 로 zip 파일 이동
 
 deploy:
   - provider: s3
