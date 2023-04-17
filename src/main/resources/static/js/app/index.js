@@ -18,6 +18,8 @@ var main = {
             content: $('#content').val()
         };
 
+        console.log(data);
+
         $.ajax({
             type: 'post',
             url: '/api/v1/posts',
@@ -29,6 +31,7 @@ var main = {
             window.location.href='/';
         }).fail(function(error){
             alert(JSON.stringify(error));
+            console.log(error);
         });
     },
     update : function() {
