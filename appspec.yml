@@ -14,5 +14,5 @@ permissions: # Code Deploy 에서 EC2 서버로 넘겨준 파일 모두 ec2-user
 hooks: # Code Deploy 배포 단계에서 실행될 명령어 지정
   ApplicationStart:
     - location: deploy.sh
-      timeout: 60 # 스크립트가 60초 이상 실행되면 실패로 간주하고 수행 종료시킴
+      timeout: 90 # 스크립트가 90초 이상 실행되면 실패로 간주하고 수행 종료시킴
       runas: ec2-user
