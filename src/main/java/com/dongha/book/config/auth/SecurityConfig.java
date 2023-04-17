@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable() //
                 .and()
                     .authorizeRequests() // url 별로 권한관리를 설정하기 위한 시작점 - 해당 메서드 이후로 antMatcher 메서드를 호출하여 권한을 지정할 수 있다.
-                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll() // antMatcher 에 권한을 지정할 대상 uri 를 나열하고, permitAll() 메서드로 모두에게 호출 가능하게끔 권한을 열어둔다.
+                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll() // antMatcher 에 권한을 지정할 대상 uri 를 나열하고, permitAll() 메서드로 모두에게 호출 가능하게끔 권한을 열어둔다.
                     .antMatchers("/api/v1/**").hasRole(Role.USER.name()) // antMatcher 에 나열된 uri 들은 USER 권한을 가진 사용자에게만 허용된다.
                     .anyRequest().authenticated() // anyRequest 메서드는 위에서 antMatcher 메서드를 통해 지정되지 않은 모든 uri 를 의미하고, authenticated 메서드를 통해 인가를 받은 요청에서만 접근을 허용한다.
                 .and()
